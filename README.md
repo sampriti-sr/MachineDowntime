@@ -137,26 +137,39 @@ pip install flask pandas scikit-learn
 
 ---
 
-## Example API Requests and Responses
+## Example Requests and Responses
 
 ### 1. Upload Data
-#### Request (cURL):
-```bash
-curl -X POST -F "file=@data.csv" http://127.0.0.1:5000/upload
+#### Request (RESTful API):
+**POST** `http://127.0.0.1:5000/upload`
+
+**Headers**:
 ```
+Content-Type: multipart/form-data
+```
+
+**Body**:
+- Form data:
+  - Key: `file`
+  - Value: `<your_csv_file>`
+
 #### Response:
 ```json
 {
     "message": "Data uploaded successfully",
-    "shape": [1000, 15]
+    "shape": [2000, 16]
 }
 ```
 
 ### 2. Train the Model
-#### Request (cURL):
-```bash
-curl -X POST http://127.0.0.1:5000/train
+#### Request (RESTful API):
+**POST** `http://127.0.0.1:5000/train`
+
+**Headers**:
 ```
+Content-Type: application/json
+```
+
 #### Response:
 ```json
 {
@@ -167,9 +180,17 @@ curl -X POST http://127.0.0.1:5000/train
 ```
 
 ### 3. Make a Prediction
-#### Request (cURL):
-```bash
-curl -X POST -H "Content-Type: application/json" -d '{
+#### Request (RESTful API):
+**POST** `http://127.0.0.1:5000/predict`
+
+**Headers**:
+```
+Content-Type: application/json
+```
+
+**Body**:
+```json
+{
     "Date": "31-12-2021",
     "Machine_ID": "Makino-L1-Unit1-2013",
     "Assembly_Line_No": "Shopfloor-L1",
@@ -185,7 +206,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "Voltage(volts)": 335,
     "Torque(Nm)": 24.0553,
     "Cutting(kN)": 3.58
-}' http://127.0.0.1:5000/predict
+}
 ```
 
 #### Response:
@@ -206,5 +227,5 @@ curl -X POST -H "Content-Type: application/json" -d '{
 ---
 
 ## Contact
-For questions or support, please contact [your-email@example.com].
+For questions or support, please contact [srsampriti@gmail.com].
 
